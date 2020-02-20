@@ -25,7 +25,7 @@ class AppCoordinator: Coordinator {
     
     func start() {
         let mainCoordinator = MainCoordinator(router: router)
-        add(child: mainCoordinator)
+        hold(child: mainCoordinator)
         mainCoordinator.start()
         
         window?.rootViewController = router.navigationController

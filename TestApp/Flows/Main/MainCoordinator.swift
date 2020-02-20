@@ -27,9 +27,9 @@ class MainCoordinator: Coordinator {
     
     func startDetail() {
         let detailCoordinator = DetailCoordinator(router: router)
-        add(child: detailCoordinator)
+        hold(child: detailCoordinator)
         detailCoordinator.isCompleted = { [weak self] in
-            self?.remove(child: detailCoordinator)
+            self?.release(child: detailCoordinator)
         }
         detailCoordinator.start()
     }

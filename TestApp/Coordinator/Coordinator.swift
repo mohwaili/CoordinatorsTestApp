@@ -42,14 +42,14 @@ extension Coordinator {
         }
     }
     
-    func add(child: Coordinator) {
+    func hold(child: Coordinator) {
         if childCoordinators == nil {
             childCoordinators = []
         }
         childCoordinators?.append(child)
     }
     
-    func remove(child: Coordinator) {
+    func release(child: Coordinator) {
         childCoordinators = childCoordinators?.filter { $0 !== child }
     }
     
