@@ -28,8 +28,7 @@ class CoordinatorsTests: XCTestCase {
         mainCoordinator.start()
         
         let detailCoordinator = FakeDetailCoordinator(router: router)
-        mainCoordinator.add(child: detailCoordinator)
-        detailCoordinator.start()
+        mainCoordinator.prepare(child: detailCoordinator).start()
         
         XCTAssert(router.navigationController.viewControllers[0] is FakeMainViewController)
         XCTAssert(router.navigationController.viewControllers[1] is FakeDetailViewController)
@@ -39,8 +38,7 @@ class CoordinatorsTests: XCTestCase {
         mainCoordinator.start()
         
         let detailCoordinator = FakeDetailCoordinator(router: router)
-        mainCoordinator.add(child: detailCoordinator)
-        detailCoordinator.start()
+        mainCoordinator.prepare(child: detailCoordinator).start()
         
         XCTAssert(router.navigationController.viewControllers[0] is FakeMainViewController)
         XCTAssert(router.navigationController.viewControllers[1] is FakeDetailViewController)
@@ -56,8 +54,7 @@ class CoordinatorsTests: XCTestCase {
         mainCoordinator.start()
         
         let detailCoordinator = FakeDetailCoordinator(router: router)
-        mainCoordinator.add(child: detailCoordinator)
-        detailCoordinator.start()
+        mainCoordinator.prepare(child: detailCoordinator).start()
         
         XCTAssert(router.navigationController.viewControllers[0] is FakeMainViewController)
         XCTAssert(router.navigationController.viewControllers[1] is FakeDetailViewController)
@@ -69,11 +66,7 @@ class CoordinatorsTests: XCTestCase {
         mainCoordinator.start()
         
         let detailCoordinator = FakeDetailCoordinator(router: router)
-        detailCoordinator.isCompleted = {
-            self.mainCoordinator.remove(child: detailCoordinator)
-        }
-        mainCoordinator.add(child: detailCoordinator)
-        detailCoordinator.start()
+        mainCoordinator.prepare(child: detailCoordinator).start()
         
         XCTAssert(router.navigationController.viewControllers[0] is FakeMainViewController)
         XCTAssert(router.navigationController.viewControllers[1] is FakeDetailViewController)

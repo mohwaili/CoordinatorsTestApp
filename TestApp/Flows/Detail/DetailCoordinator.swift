@@ -24,11 +24,7 @@ class DetailCoordinator: Coordinator {
     
     func openSubFlow() {
         let subDetailCoordinator = SubDetailCoordinator(router: self.router)
-        hold(child: subDetailCoordinator)
-        subDetailCoordinator.isCompleted = { [weak self] in
-            self?.release(child: subDetailCoordinator)
-        }
-        subDetailCoordinator.start()
+        prepare(child: subDetailCoordinator).start()
     }
     
     func finishFlow() {

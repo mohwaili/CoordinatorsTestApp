@@ -42,15 +42,24 @@ extension Coordinator {
         }
     }
     
-    func hold(child: Coordinator) {
+    private func hold(child: Coordinator) {
         if childCoordinators == nil {
             childCoordinators = []
         }
         childCoordinators?.append(child)
     }
     
-    func release(child: Coordinator) {
+    private func release(child: Coordinator) {
         childCoordinators = childCoordinators?.filter { $0 !== child }
+    }
+    
+    @discardableResult
+    func prepare(child: Coordinator) -> Coordinator {
+        child.isCompleted = { [weak self] in
+            self?.release(child: child)
+        }
+        hold(child: child)
+        return child
     }
     
 }
