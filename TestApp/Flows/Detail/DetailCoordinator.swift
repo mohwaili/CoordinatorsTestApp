@@ -19,12 +19,11 @@ class DetailCoordinator: Coordinator {
     func start() {
         let viewController = DetailViewController()
         viewController.coordinator = self
-        router.push(viewController: viewController, animated: true, onBackClosure: isCompleted)
+        router.push(viewController: viewController, animated: true, origin: self)
     }
     
     func openSubFlow() {
-        let subDetailCoordinator = SubDetailCoordinator(router: self.router)
-        prepare(child: subDetailCoordinator).start()
+        prepare(child: SubDetailCoordinator(router: router)).start()
     }
     
     func finishFlow() {

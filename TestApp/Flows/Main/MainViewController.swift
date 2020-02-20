@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    weak var coordinator: Coordinator?
+    weak var coordinator: MainCoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -32,7 +32,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func showDetail(_ sender: Any) {
-        coordinator?.isCompleted?()
+        coordinator?.startDetail()
     }
     
 }

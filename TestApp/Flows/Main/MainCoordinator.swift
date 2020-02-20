@@ -19,10 +19,7 @@ class MainCoordinator: Coordinator {
     func start() {
         let mainVC = MainViewController()
         mainVC.coordinator = self
-        isCompleted = { [weak self] in
-            self?.startDetail()
-        }
-        router.push(viewController: mainVC, animated: false, onBackClosure: isCompleted)
+        router.push(viewController: mainVC, animated: false, origin: self)
     }
     
     func startDetail() {

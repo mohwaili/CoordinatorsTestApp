@@ -19,7 +19,7 @@ class SubDetailCoordinator: Coordinator {
     func start() {
         let viewController = SubDetailViewController()
         viewController.coordinator = self
-        router.present(viewController: viewController, animated: true, dismissClosure: isCompleted)
+        router.present(viewController: viewController, animated: true, origin: self)
     }
     
     func finishFlow() {

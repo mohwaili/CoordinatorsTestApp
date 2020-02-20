@@ -9,24 +9,24 @@
 import Foundation
 import UIKit
 
-typealias OnBackClosure = (() -> Void)
+typealias FlowDestructionClosure = (() -> Void)
 typealias MemoryAddress = String
 
 protocol Router: class {
     var navigationController: UINavigationController { get set }
-    var onBackClosures: [MemoryAddress: OnBackClosure] { get set }
+    var onBackClosures: [MemoryAddress: FlowDestructionClosure] { get set }
     
-    func push(viewController: UIViewController, animated: Bool, onBackClosure: OnBackClosure?)
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
-    func present(viewController: UIViewController, animated: Bool, dismissClosure: OnBackClosure?)
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?)
     func dismiss(animated: Bool)
 }
 
 
 class RouterImp: NSObject, Router {
     var navigationController: UINavigationController
-    var onBackClosures: [String: OnBackClosure] = [:]
+    var onBackClosures: [String: FlowDestructionClosure] = [:]
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -34,10 +34,10 @@ class RouterImp: NSObject, Router {
         self.navigationController.delegate = self
     }
     
-    func push(viewController: UIViewController, animated: Bool, onBackClosure: OnBackClosure?) {
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         navigationController.pushViewController(viewController, animated: animated)
-        guard let onBackClosure = onBackClosure else { return }
-        onBackClosures.updateValue(onBackClosure, forKey: key(from: viewController))
+        guard let destructionClosure = origin?.isCompleted else { return }
+        onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
     func pop(animated: Bool) {
@@ -48,11 +48,11 @@ class RouterImp: NSObject, Router {
         navigationController.popToRootViewController(animated: animated)
     }
     
-    func present(viewController: UIViewController, animated: Bool, dismissClosure: OnBackClosure?) {
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         navigationController.present(viewController, animated: animated)
         viewController.presentationController?.delegate = self
-        guard let onBackClosure = dismissClosure else { return }
-        onBackClosures.updateValue(onBackClosure, forKey: key(from: viewController))
+        guard let destructionClosure = origin?.isCompleted else { return }
+        onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
     func dismiss(animated: Bool) {
