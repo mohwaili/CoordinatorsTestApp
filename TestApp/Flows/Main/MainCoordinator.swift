@@ -9,6 +9,8 @@
 import Foundation
 
 class MainCoordinator: Coordinator {
+    var isCompleted: (() -> Void)?
+    
     
     let router: Router
     
@@ -19,12 +21,17 @@ class MainCoordinator: Coordinator {
     func start() {
         let mainVC = MainViewController()
         mainVC.coordinator = self
-        router.push(viewController: mainVC, animated: false, origin: self)
+        router.push(viewController: mainVC, animated: false, completion: isCompleted)//origin: self)
     }
     
     func startDetail() {
         let detailCoordinator = DetailCoordinator(router: router)
-        prepare(child: detailCoordinator).start()
+        hold(child: detailCoordinator)
+        detailCoordinator.isCompleted = { [weak self, weak detailCoordinator] in
+            self?.release(child: detailCoordinator!)
+        }
+        detailCoordinator.start()
+//        prepare(child: detailCoordinator).start()
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class SubDetailViewController: UIViewController {
     
-    var coordinator: SubDetailCoordinator?
+    weak var coordinator: SubDetailCoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -37,5 +37,8 @@ class SubDetailViewController: UIViewController {
         coordinator?.finishFlow()
     }
     
+    deinit {
+        print("deinit subdetail")
+    }
     
 }

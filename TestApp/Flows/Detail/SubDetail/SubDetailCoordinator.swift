@@ -7,19 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
 class SubDetailCoordinator: Coordinator {
-
+    var isCompleted: (() -> Void)?
     let router: Router
+    var rootViewController: SubDetailViewController?
     
     required init(router: Router) {
         self.router = router
     }
     
     func start() {
-        let viewController = SubDetailViewController()
-        viewController.coordinator = self
-        router.present(viewController: viewController, animated: true, origin: self)
+        rootViewController = SubDetailViewController()
+        rootViewController?.coordinator = self
+        router.present(viewController: rootViewController!, animated: true, completion: isCompleted) //origin: self)
     }
     
     func finishFlow() {

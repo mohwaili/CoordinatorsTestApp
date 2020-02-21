@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var coordinator: DetailCoordinator?
+    weak var coordinator: DetailCoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -57,6 +57,10 @@ class DetailViewController: UIViewController {
     
     @objc func openSubFlow(_ sender: Any) {
         coordinator?.openSubFlow()
+    }
+    
+    deinit {
+        print("deinit detail")
     }
     
 }
