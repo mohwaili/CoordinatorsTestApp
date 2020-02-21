@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 class AppCoordinator: Coordinator {
-    var isCompleted: (() -> Void)?
-    
-    
+
     var window: UIWindow?
     let router: Router
     
@@ -27,13 +25,7 @@ class AppCoordinator: Coordinator {
     
     func start() {
         let mainCoordinator = MainCoordinator(router: router)
-        mainCoordinator.isCompleted = { [weak self, weak mainCoordinator] in
-            self?.release(child: mainCoordinator!)
-        }
-        hold(child: mainCoordinator)
-        mainCoordinator.start()
-//        prepare(child: )
-//            .start()
+        prepare(child: mainCoordinator).start()
         
         window?.rootViewController = router.navigationController
         window?.makeKeyAndVisible()

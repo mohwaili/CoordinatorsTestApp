@@ -59,8 +59,4 @@ class DetailViewController: UIViewController {
         coordinator?.openSubFlow()
     }
     
-    deinit {
-        print("deinit detail")
-    }
-    
 }

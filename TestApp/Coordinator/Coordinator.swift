@@ -11,9 +11,7 @@ import UIKit
 
 protocol Coordinator: class {
     var childCoordinators: [Coordinator]? { get set }
-//    var rootViewController: View? { get set }
     var router: Router { get }
-    var isCompleted: (() -> Void)? { get set }
     
     init(router: Router)
     
@@ -36,47 +34,57 @@ extension Coordinator {
         }
     }
     
-//    var isCompleted: (() -> Void)? {
-//        get {
-//            return objc_getAssociatedObject(self, &Keys.isCompletedClosureId) as? (() -> Void)
-//        }
-//        set {
-//            objc_setAssociatedObject(self, &Keys.isCompletedClosureId, newValue, .OBJC_ASSOCIATION_COPY)
-//        }
-//    }
-    
-    func hold(child: Coordinator) {
-        if childCoordinators == nil {
-            childCoordinators = []
+    var isCompleted: (() -> Void)? {
+        get {
+            return objc_getAssociatedObject(self, &Keys.isCompletedClosureId) as? (() -> Void)
         }
+        set {
+            objc_setAssociatedObject(self, &Keys.isCompletedClosureId, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    private func hold(child: Coordinator) {
+        if childCoordinators == nil { childCoordinators = [] }
+        print("Holding: \(NSStringFromClass(type(of: child))) in \(NSStringFromClass(type(of: self)))")
         childCoordinators?.append(child)
     }
     
-    func release(child: Coordinator) {
+    private func release(child: Coordinator?) {
+        guard let child = child else { return }
+        print("Releasing: \(NSStringFromClass(type(of: child))) from \(NSStringFromClass(type(of: self)))")
         childCoordinators = childCoordinators?.filter { $0 !== child }
-        print(child)
     }
     
-//    @discardableResult
-//    func prepare(child: Coordinator) -> Coordinator {
-//        child.isCompleted = { [weak self] in
-//            self?.release(child: child)
-//        }
-//        hold(child: child)
-//        return child
-//    }
+    @discardableResult
+    func prepare(child: Coordinator) -> Coordinator {
+        child.isCompleted = { [weak self, weak child] in
+            self?.release(child: child)
+        }
+        hold(child: child)
+        return child
+    }
     
     func debug() {
-        printChildren(of: self)
+        var indentation = 0
+        printChildren(of: self, indentation: &indentation)
+        print("\n")
     }
     
-    private func printChildren(of coordinator: Coordinator) {
-        print("\(coordinator)")
+    private func tabs(multipliedBy number: Int) -> String {
+        var tabs = ""
+        for _ in 0..<number {
+            tabs += "---"
+        }
+        return tabs
+    }
+    
+    private func printChildren(of coordinator: Coordinator, indentation: inout Int) {
+        print("\(tabs(multipliedBy: indentation))\(coordinator)")
+        indentation += 1
         guard let children = coordinator.childCoordinators else { return }
         for child in children {
-            printChildren(of: child)
+            printChildren(of: child, indentation: &indentation)
         }
-        print("\n")
     }
     
 }

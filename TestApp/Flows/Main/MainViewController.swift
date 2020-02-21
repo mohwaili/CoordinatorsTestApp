@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    var coordinator: MainCoordinator?
+    weak var coordinator: MainCoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()

@@ -22,12 +22,27 @@ class SubDetailViewController: UIViewController {
         return button
     }()
     
+    private lazy var subFlowButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Open Sub Flow", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(subFlowTapped(_:)), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            subFlowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            subFlowButton.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10)
         ])
         
         view.backgroundColor = .white
@@ -37,8 +52,8 @@ class SubDetailViewController: UIViewController {
         coordinator?.finishFlow()
     }
     
-    deinit {
-        print("deinit subdetail")
+    @objc func subFlowTapped(_ sender: Any) {
+        coordinator?.openSubFlow()
     }
     
 }

@@ -22,6 +22,7 @@
 		BD252B7A23FD3D7B0006A1CF /* SubDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */; };
 		BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */; };
 		BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */; };
+		BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179F240022C300D3E60A /* SubSubViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailCoordinator.swift; sourceTree = "<group>"; };
 		BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailViewController.swift; sourceTree = "<group>"; };
 		BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+MemoryAddress.swift"; sourceTree = "<group>"; };
+		BDB0179F240022C300D3E60A /* SubSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSubViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 		BD252B7823FD3D6D0006A1CF /* SubDetail */ = {
 			isa = PBXGroup;
 			children = (
+				BDB0179E240022B000D3E60A /* SubSub */,
 				BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */,
 				BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */,
 			);
@@ -193,6 +196,14 @@
 				BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BDB0179E240022B000D3E60A /* SubSub */ = {
+			isa = PBXGroup;
+			children = (
+				BDB0179F240022C300D3E60A /* SubSubViewController.swift */,
+			);
+			path = SubSub;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +315,7 @@
 				BD252B6023FC33700006A1CF /* Router.swift in Sources */,
 				BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */,
 				BD0CBC3223FAC58300B3F5B9 /* Coordinator.swift in Sources */,
+				BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */,
 				BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */,
 				BD0CBBFF23FABE5000B3F5B9 /* AppDelegate.swift in Sources */,
 				BD0CBC0123FABE5000B3F5B9 /* SceneDelegate.swift in Sources */,

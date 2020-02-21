@@ -10,22 +10,30 @@ import Foundation
 import UIKit
 
 class SubDetailCoordinator: Coordinator {
-    var isCompleted: (() -> Void)?
     let router: Router
-    var rootViewController: SubDetailViewController?
+    var rootViewController: UINavigationController!
     
     required init(router: Router) {
         self.router = router
     }
     
     func start() {
-        rootViewController = SubDetailViewController()
-        rootViewController?.coordinator = self
-        router.present(viewController: rootViewController!, animated: true, completion: isCompleted) //origin: self)
+        let subDetailViewController = SubDetailViewController()
+        rootViewController = UINavigationController(rootViewController: subDetailViewController)
+        subDetailViewController.coordinator = self
+        router.present(viewController: rootViewController, animated: true, origin: self)
+//        rootViewController = SubDetailViewController()
+//        rootViewController?.coordinator = self
+//        router.present(viewController: rootViewController!, animated: true, origin: self)
     }
     
     func finishFlow() {
         router.dismiss(animated: true)
+    }
+    
+    func openSubFlow() {
+        let vc = SubSubViewController()
+        rootViewController.pushViewController(vc, animated: true)
     }
     
 }

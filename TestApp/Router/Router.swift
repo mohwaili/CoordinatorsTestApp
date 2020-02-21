@@ -16,10 +16,10 @@ protocol Router: class {
     var navigationController: UINavigationController { get set }
     var onBackClosures: [MemoryAddress: FlowDestructionClosure] { get set }
     
-    func push(viewController: UIViewController, animated: Bool, completion: FlowDestructionClosure?)//origin: Coordinator?)
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
-    func present(viewController: UIViewController, animated: Bool, completion: FlowDestructionClosure?)//origin: Coordinator?)
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?)
     func dismiss(animated: Bool)
 }
 
@@ -34,9 +34,9 @@ class RouterImp: NSObject, Router {
         self.navigationController.delegate = self
     }
     
-    func push(viewController: UIViewController, animated: Bool, completion: FlowDestructionClosure?) {
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         navigationController.pushViewController(viewController, animated: animated)
-        guard let destructionClosure = completion else { return }
+        guard let destructionClosure = origin?.isCompleted else { return }
         onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
@@ -48,10 +48,10 @@ class RouterImp: NSObject, Router {
         navigationController.popToRootViewController(animated: animated)
     }
     
-    func present(viewController: UIViewController, animated: Bool, completion: FlowDestructionClosure?) {
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         navigationController.present(viewController, animated: animated)
         viewController.presentationController?.delegate = self
-        guard let destructionClosure = completion else { return }
+        guard let destructionClosure = origin?.isCompleted else { return }
         onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     

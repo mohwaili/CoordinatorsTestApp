@@ -13,7 +13,6 @@ class DetailCoordinator: Coordinator {
 
     let router: Router
     var rootViewController: DetailViewController?
-    var isCompleted: (() -> Void)?
     
     required init(router: Router) {
         self.router = router
@@ -22,16 +21,12 @@ class DetailCoordinator: Coordinator {
     func start() {
         rootViewController = DetailViewController()
         rootViewController?.coordinator = self
-        router.push(viewController: rootViewController!, animated: true, completion: isCompleted) //origin: self)
+        router.push(viewController: rootViewController!, animated: true, origin: self)
     }
     
     func openSubFlow() {
         let coordinator = SubDetailCoordinator(router: router)
-        coordinator.isCompleted = { [weak self, weak coordinator] in
-            self?.release(child: coordinator!)
-        }
-        hold(child: coordinator)
-        coordinator.start()
+        prepare(child: coordinator).start()
     }
     
     func finishFlow() {
