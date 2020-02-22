@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class FlowAViewController: UIViewController {
     
-    weak var coordinator: DetailCoordinator?
+    weak var coordinator: FlowACoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()

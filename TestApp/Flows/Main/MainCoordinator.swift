@@ -25,13 +25,8 @@ class MainCoordinator: Coordinator {
     }
     
     func startDetail() {
-        let detailCoordinator = DetailCoordinator(router: router)
-//        hold(child: detailCoordinator)
-//        detailCoordinator.isCompleted = { [weak self, weak detailCoordinator] in
-//            self?.release(child: detailCoordinator!)
-//        }
-//        detailCoordinator.start()
-        prepare(child: detailCoordinator).start()
+        let flowACoordinator = FlowACoordinator(router: router)
+        prepare(child: flowACoordinator).start()
     }
     
 }

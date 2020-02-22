@@ -15,10 +15,10 @@
 		BD0CBC1623FABE5200B3F5B9 /* CoordinatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0CBC1523FABE5200B3F5B9 /* CoordinatorsTests.swift */; };
 		BD0CBC3223FAC58300B3F5B9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0CBC3123FAC58300B3F5B9 /* Coordinator.swift */; };
 		BD0CBC3423FAC7A700B3F5B9 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0CBC3323FAC7A700B3F5B9 /* AppCoordinator.swift */; };
-		BD0CBC3623FACE7A00B3F5B9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0CBC3523FACE7A00B3F5B9 /* DetailViewController.swift */; };
+		BD0CBC3623FACE7A00B3F5B9 /* FlowAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0CBC3523FACE7A00B3F5B9 /* FlowAViewController.swift */; };
 		BD252B6023FC33700006A1CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B5F23FC33700006A1CF /* Router.swift */; };
 		BD252B6623FC3F950006A1CF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B6523FC3F950006A1CF /* MainCoordinator.swift */; };
-		BD252B6823FC3FB40006A1CF /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B6723FC3FB40006A1CF /* DetailCoordinator.swift */; };
+		BD252B6823FC3FB40006A1CF /* FlowACoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B6723FC3FB40006A1CF /* FlowACoordinator.swift */; };
 		BD252B7A23FD3D7B0006A1CF /* SubDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */; };
 		BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */; };
 		BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */; };
@@ -49,10 +49,10 @@
 		BD0CBC1723FABE5200B3F5B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD0CBC3123FAC58300B3F5B9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		BD0CBC3323FAC7A700B3F5B9 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		BD0CBC3523FACE7A00B3F5B9 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BD0CBC3523FACE7A00B3F5B9 /* FlowAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowAViewController.swift; sourceTree = "<group>"; };
 		BD252B5F23FC33700006A1CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BD252B6523FC3F950006A1CF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		BD252B6723FC3FB40006A1CF /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
+		BD252B6723FC3FB40006A1CF /* FlowACoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowACoordinator.swift; sourceTree = "<group>"; };
 		BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailCoordinator.swift; sourceTree = "<group>"; };
 		BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailViewController.swift; sourceTree = "<group>"; };
 		BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+MemoryAddress.swift"; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			children = (
 				BD252B7D23FD41820006A1CF /* App */,
 				BD252B6323FC3F020006A1CF /* Main */,
-				BD252B6423FC3F090006A1CF /* Detail */,
+				BD252B6423FC3F090006A1CF /* FlowA */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -156,14 +156,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		BD252B6423FC3F090006A1CF /* Detail */ = {
+		BD252B6423FC3F090006A1CF /* FlowA */ = {
 			isa = PBXGroup;
 			children = (
-				BD252B7823FD3D6D0006A1CF /* SubDetail */,
-				BD0CBC3523FACE7A00B3F5B9 /* DetailViewController.swift */,
-				BD252B6723FC3FB40006A1CF /* DetailCoordinator.swift */,
+				BD252B7823FD3D6D0006A1CF /* FlowB */,
+				BD0CBC3523FACE7A00B3F5B9 /* FlowAViewController.swift */,
+				BD252B6723FC3FB40006A1CF /* FlowACoordinator.swift */,
 			);
-			path = Detail;
+			path = FlowA;
 			sourceTree = "<group>";
 		};
 		BD252B6923FC3FD70006A1CF /* Resources */ = {
@@ -174,14 +174,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		BD252B7823FD3D6D0006A1CF /* SubDetail */ = {
+		BD252B7823FD3D6D0006A1CF /* FlowB */ = {
 			isa = PBXGroup;
 			children = (
 				BDB0179E240022B000D3E60A /* SubSub */,
 				BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */,
 				BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */,
 			);
-			path = SubDetail;
+			path = FlowB;
 			sourceTree = "<group>";
 		};
 		BD252B7D23FD41820006A1CF /* App */ = {
@@ -312,8 +312,8 @@
 				BD0CBC3423FAC7A700B3F5B9 /* AppCoordinator.swift in Sources */,
 				BD252B6623FC3F950006A1CF /* MainCoordinator.swift in Sources */,
 				BD252B7A23FD3D7B0006A1CF /* SubDetailCoordinator.swift in Sources */,
-				BD0CBC3623FACE7A00B3F5B9 /* DetailViewController.swift in Sources */,
-				BD252B6823FC3FB40006A1CF /* DetailCoordinator.swift in Sources */,
+				BD0CBC3623FACE7A00B3F5B9 /* FlowAViewController.swift in Sources */,
+				BD252B6823FC3FB40006A1CF /* FlowACoordinator.swift in Sources */,
 				BD0CBC0323FABE5000B3F5B9 /* MainViewController.swift in Sources */,
 				BD252B6023FC33700006A1CF /* Router.swift in Sources */,
 				BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */,

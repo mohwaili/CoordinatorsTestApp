@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-class DetailCoordinator: Coordinator {
+class FlowACoordinator: Coordinator {
 
     let router: Router
-    var rootViewController: DetailViewController?
+    var rootViewController: FlowAViewController?
     
     required init(router: Router) {
         self.router = router
     }
     
     func start() {
-        rootViewController = DetailViewController()
+        rootViewController = FlowAViewController()
         rootViewController?.coordinator = self
         router.push(viewController: rootViewController!, animated: true, origin: self)
     }
