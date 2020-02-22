@@ -22,9 +22,6 @@ class SubDetailCoordinator: Coordinator {
         rootViewController = UINavigationController(rootViewController: subDetailViewController)
         subDetailViewController.coordinator = self
         router.present(viewController: rootViewController, animated: true, origin: self)
-//        rootViewController = SubDetailViewController()
-//        rootViewController?.coordinator = self
-//        router.present(viewController: rootViewController!, animated: true, origin: self)
     }
     
     func finishFlow() {
@@ -32,8 +29,7 @@ class SubDetailCoordinator: Coordinator {
     }
     
     func openSubFlow() {
-        let vc = SubSubViewController()
-        rootViewController.pushViewController(vc, animated: true)
+        prepare(child: SubSubFlowCoordinator(router: router)).start()
     }
     
 }

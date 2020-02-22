@@ -56,4 +56,8 @@ class SubDetailViewController: UIViewController {
         coordinator?.openSubFlow()
     }
     
+    deinit {
+        print("deallocating: \(Self.self)")
+    }
+    
 }

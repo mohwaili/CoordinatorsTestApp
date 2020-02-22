@@ -45,13 +45,13 @@ extension Coordinator {
     
     private func hold(child: Coordinator) {
         if childCoordinators == nil { childCoordinators = [] }
-        print("Holding: \(NSStringFromClass(type(of: child))) in \(NSStringFromClass(type(of: self)))")
+        print("Holding: [\(String(describing: type(of: child)))] in [\(Self.self)]")
         childCoordinators?.append(child)
     }
     
     private func release(child: Coordinator?) {
         guard let child = child else { return }
-        print("Releasing: \(NSStringFromClass(type(of: child))) from \(NSStringFromClass(type(of: self)))")
+        print("Releasing: [\(String(describing: type(of: child)))] from [\(Self.self)]")
         childCoordinators = childCoordinators?.filter { $0 !== child }
     }
     
@@ -85,6 +85,7 @@ extension Coordinator {
         for child in children {
             printChildren(of: child, indentation: &indentation)
         }
+        indentation -= 1
     }
     
 }

@@ -23,6 +23,7 @@
 		BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */; };
 		BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */; };
 		BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179F240022C300D3E60A /* SubSubViewController.swift */; };
+		BDB017A624013DE800D3E60A /* SubSubFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailViewController.swift; sourceTree = "<group>"; };
 		BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+MemoryAddress.swift"; sourceTree = "<group>"; };
 		BDB0179F240022C300D3E60A /* SubSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSubViewController.swift; sourceTree = "<group>"; };
+		BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSubFlowCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				BDB0179F240022C300D3E60A /* SubSubViewController.swift */,
+				BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */,
 			);
 			path = SubSub;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */,
 				BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */,
 				BD0CBBFF23FABE5000B3F5B9 /* AppDelegate.swift in Sources */,
+				BDB017A624013DE800D3E60A /* SubSubFlowCoordinator.swift in Sources */,
 				BD0CBC0123FABE5000B3F5B9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

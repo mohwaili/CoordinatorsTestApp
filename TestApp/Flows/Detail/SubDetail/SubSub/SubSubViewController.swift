@@ -10,10 +10,16 @@ import UIKit
 
 class SubSubViewController: UIViewController {
 
+    weak var coordinator: SubSubFlowCoordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
+    }
+    
+    deinit {
+        print("deallocating: \(Self.self)")
     }
 
 }
