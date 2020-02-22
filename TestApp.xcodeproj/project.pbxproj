@@ -19,11 +19,11 @@
 		BD252B6023FC33700006A1CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B5F23FC33700006A1CF /* Router.swift */; };
 		BD252B6623FC3F950006A1CF /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B6523FC3F950006A1CF /* MainCoordinator.swift */; };
 		BD252B6823FC3FB40006A1CF /* FlowACoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B6723FC3FB40006A1CF /* FlowACoordinator.swift */; };
-		BD252B7A23FD3D7B0006A1CF /* SubDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */; };
-		BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */; };
+		BD252B7A23FD3D7B0006A1CF /* FlowBCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7923FD3D7B0006A1CF /* FlowBCoordinator.swift */; };
+		BD252B7C23FD3DCB0006A1CF /* FlowBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD252B7B23FD3DCB0006A1CF /* FlowBViewController.swift */; };
 		BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */; };
-		BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179F240022C300D3E60A /* SubSubViewController.swift */; };
-		BDB017A624013DE800D3E60A /* SubSubFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */; };
+		BDB017A0240022C300D3E60A /* FlowCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB0179F240022C300D3E60A /* FlowCViewController.swift */; };
+		BDB017A624013DE800D3E60A /* FlowCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB017A524013DE800D3E60A /* FlowCCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,11 +53,11 @@
 		BD252B5F23FC33700006A1CF /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BD252B6523FC3F950006A1CF /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		BD252B6723FC3FB40006A1CF /* FlowACoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowACoordinator.swift; sourceTree = "<group>"; };
-		BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailCoordinator.swift; sourceTree = "<group>"; };
-		BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDetailViewController.swift; sourceTree = "<group>"; };
+		BD252B7923FD3D7B0006A1CF /* FlowBCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowBCoordinator.swift; sourceTree = "<group>"; };
+		BD252B7B23FD3DCB0006A1CF /* FlowBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowBViewController.swift; sourceTree = "<group>"; };
 		BDB0179123FD4D1600D3E60A /* NSObject+MemoryAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+MemoryAddress.swift"; sourceTree = "<group>"; };
-		BDB0179F240022C300D3E60A /* SubSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSubViewController.swift; sourceTree = "<group>"; };
-		BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSubFlowCoordinator.swift; sourceTree = "<group>"; };
+		BDB0179F240022C300D3E60A /* FlowCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCViewController.swift; sourceTree = "<group>"; };
+		BDB017A524013DE800D3E60A /* FlowCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,9 +177,9 @@
 		BD252B7823FD3D6D0006A1CF /* FlowB */ = {
 			isa = PBXGroup;
 			children = (
-				BDB0179E240022B000D3E60A /* SubSub */,
-				BD252B7923FD3D7B0006A1CF /* SubDetailCoordinator.swift */,
-				BD252B7B23FD3DCB0006A1CF /* SubDetailViewController.swift */,
+				BDB0179E240022B000D3E60A /* FlowC */,
+				BD252B7923FD3D7B0006A1CF /* FlowBCoordinator.swift */,
+				BD252B7B23FD3DCB0006A1CF /* FlowBViewController.swift */,
 			);
 			path = FlowB;
 			sourceTree = "<group>";
@@ -200,13 +200,13 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		BDB0179E240022B000D3E60A /* SubSub */ = {
+		BDB0179E240022B000D3E60A /* FlowC */ = {
 			isa = PBXGroup;
 			children = (
-				BDB0179F240022C300D3E60A /* SubSubViewController.swift */,
-				BDB017A524013DE800D3E60A /* SubSubFlowCoordinator.swift */,
+				BDB0179F240022C300D3E60A /* FlowCViewController.swift */,
+				BDB017A524013DE800D3E60A /* FlowCCoordinator.swift */,
 			);
-			path = SubSub;
+			path = FlowC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,17 +311,17 @@
 			files = (
 				BD0CBC3423FAC7A700B3F5B9 /* AppCoordinator.swift in Sources */,
 				BD252B6623FC3F950006A1CF /* MainCoordinator.swift in Sources */,
-				BD252B7A23FD3D7B0006A1CF /* SubDetailCoordinator.swift in Sources */,
+				BD252B7A23FD3D7B0006A1CF /* FlowBCoordinator.swift in Sources */,
 				BD0CBC3623FACE7A00B3F5B9 /* FlowAViewController.swift in Sources */,
 				BD252B6823FC3FB40006A1CF /* FlowACoordinator.swift in Sources */,
 				BD0CBC0323FABE5000B3F5B9 /* MainViewController.swift in Sources */,
 				BD252B6023FC33700006A1CF /* Router.swift in Sources */,
-				BD252B7C23FD3DCB0006A1CF /* SubDetailViewController.swift in Sources */,
+				BD252B7C23FD3DCB0006A1CF /* FlowBViewController.swift in Sources */,
 				BD0CBC3223FAC58300B3F5B9 /* Coordinator.swift in Sources */,
-				BDB017A0240022C300D3E60A /* SubSubViewController.swift in Sources */,
+				BDB017A0240022C300D3E60A /* FlowCViewController.swift in Sources */,
 				BDB0179223FD4D1600D3E60A /* NSObject+MemoryAddress.swift in Sources */,
 				BD0CBBFF23FABE5000B3F5B9 /* AppDelegate.swift in Sources */,
-				BDB017A624013DE800D3E60A /* SubSubFlowCoordinator.swift in Sources */,
+				BDB017A624013DE800D3E60A /* FlowCCoordinator.swift in Sources */,
 				BD0CBC0123FABE5000B3F5B9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

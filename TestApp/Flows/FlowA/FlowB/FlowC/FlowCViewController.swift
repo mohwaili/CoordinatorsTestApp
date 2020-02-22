@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SubSubViewController: UIViewController {
+class FlowCViewController: UIViewController {
 
-    weak var coordinator: SubSubFlowCoordinator?
+    weak var coordinator: FlowCCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()

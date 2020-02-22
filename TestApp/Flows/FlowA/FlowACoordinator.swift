@@ -24,8 +24,8 @@ class FlowACoordinator: Coordinator {
         router.push(viewController: rootViewController!, animated: true, origin: self)
     }
     
-    func openSubFlow() {
-        let coordinator = SubDetailCoordinator(router: router)
+    func startFlowB() {
+        let coordinator = FlowBCoordinator(router: router)
         prepare(child: coordinator).start()
     }
     

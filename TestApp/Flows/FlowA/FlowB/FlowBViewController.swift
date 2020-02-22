@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SubDetailViewController: UIViewController {
+class FlowBViewController: UIViewController {
     
-    weak var coordinator: SubDetailCoordinator?
+    weak var coordinator: FlowBCoordinator?
     
     private lazy var button: UIButton = {
         let button = UIButton()
@@ -27,7 +27,7 @@ class SubDetailViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Open Sub Flow", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(subFlowTapped(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(startFlowC(_:)), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -52,8 +52,8 @@ class SubDetailViewController: UIViewController {
         coordinator?.finishFlow()
     }
     
-    @objc func subFlowTapped(_ sender: Any) {
-        coordinator?.openSubFlow()
+    @objc func startFlowC(_ sender: Any) {
+        coordinator?.startFlowC()
     }
     
     deinit {

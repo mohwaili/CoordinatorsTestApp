@@ -28,7 +28,7 @@ class FlowAViewController: UIViewController {
         button.setTitle("Open SubFlow", for: .normal)
         button.setTitleColor(.black, for: .normal)
         view.addSubview(button)
-        button.addTarget(self, action: #selector(openSubFlow(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(startFlowB(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -55,8 +55,8 @@ class FlowAViewController: UIViewController {
         coordinator?.finishFlow()
     }
     
-    @objc func openSubFlow(_ sender: Any) {
-        coordinator?.openSubFlow()
+    @objc func startFlowB(_ sender: Any) {
+        coordinator?.startFlowB()
     }
     
     deinit {

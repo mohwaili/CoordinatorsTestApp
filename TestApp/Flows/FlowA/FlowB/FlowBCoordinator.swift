@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SubDetailCoordinator: Coordinator {
+class FlowBCoordinator: Coordinator {
     let router: Router
     var rootViewController: UINavigationController!
     
@@ -18,18 +18,18 @@ class SubDetailCoordinator: Coordinator {
     }
     
     func start() {
-        let subDetailViewController = SubDetailViewController()
-        rootViewController = UINavigationController(rootViewController: subDetailViewController)
-        subDetailViewController.coordinator = self
+        let flowBViewController = FlowBViewController()
+        rootViewController = UINavigationController(rootViewController: flowBViewController)
+        flowBViewController.coordinator = self
         router.present(viewController: rootViewController, animated: true, origin: self)
-    }
+}
     
     func finishFlow() {
         router.dismiss(animated: true)
     }
     
-    func openSubFlow() {
-        prepare(child: SubSubFlowCoordinator(router: router)).start()
+    func startFlowC() {
+        prepare(child: FlowCCoordinator(router: router)).start()
     }
     
 }
