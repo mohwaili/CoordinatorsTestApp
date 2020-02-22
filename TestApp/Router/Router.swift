@@ -43,6 +43,7 @@ class RouterImp: NSObject, Router {
     }
     
     func pop(animated: Bool) {
+        let navigationController = childNavigationControllers.last ?? self.navigationController
         navigationController.popViewController(animated: animated)
     }
     

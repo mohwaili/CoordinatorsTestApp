@@ -12,6 +12,14 @@ import UIKit
 class FlowBCoordinator: Coordinator {
     let router: Router
     var rootViewController: UINavigationController!
+    var completion: ((String) -> Void)?
+    var cData: String? = nil {
+        didSet {
+            if let bViewController = self.rootViewController.viewControllers.first as? FlowBViewController {
+                bViewController.data = cData
+            }
+        }
+    }
     
     required init(router: Router) {
         self.router = router
@@ -25,11 +33,22 @@ class FlowBCoordinator: Coordinator {
 }
     
     func finishFlow() {
+        completion?("B\(cData ?? "")")
         router.dismiss(animated: true)
     }
     
+    func goToB2() {
+        let viewController = FlowB2ViewController()
+        viewController.coordinator = self
+        router.push(viewController: viewController, animated: true, origin: self)
+    }
+    
     func startFlowC() {
-        prepare(child: FlowCCoordinator(router: router)).start()
+        let coordinator = FlowCCoordinator(router: router)
+        coordinator.completion = { [weak self] data in
+            self?.cData = data
+        }
+        prepare(child: coordinator).start()
     }
     
 }

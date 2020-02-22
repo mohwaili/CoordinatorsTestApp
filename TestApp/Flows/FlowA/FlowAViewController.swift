@@ -12,23 +12,13 @@ class FlowAViewController: UIViewController {
     
     weak var coordinator: FlowACoordinator?
     
-    private lazy var button: UIButton = {
+    private lazy var goToA2Button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Remove me", for: .normal)
+        button.setTitle("Go To A2", for: .normal)
         button.setTitleColor(.black, for: .normal)
         view.addSubview(button)
-        button.addTarget(self, action: #selector(removeMe(_:)), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var subFlowButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Open SubFlow", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        view.addSubview(button)
-        button.addTarget(self, action: #selector(startFlowB(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToA2Button(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -38,25 +28,18 @@ class FlowAViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .yellow
         
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            goToA2Button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            goToA2Button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        NSLayoutConstraint.activate([
-            subFlowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subFlowButton.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 16)
-        ])
+        self.title = "A1"
     }
     
-    @objc func removeMe(_ sender: Any) {
-        coordinator?.finishFlow()
-    }
-    
-    @objc func startFlowB(_ sender: Any) {
-        coordinator?.startFlowB()
+    @objc func goToA2Button(_ sender: Any) {
+        coordinator?.goToA2()
     }
     
     deinit {

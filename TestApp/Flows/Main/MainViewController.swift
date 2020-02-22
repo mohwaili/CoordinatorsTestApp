@@ -15,10 +15,10 @@ class MainViewController: UIViewController {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Show Detail", for: .normal)
+        button.setTitle("Start Flow A", for: .normal)
         button.setTitleColor(.black, for: .normal)
         view.addSubview(button)
-        button.addTarget(self, action: #selector(showDetail(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(startFlowA(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -29,10 +29,12 @@ class MainViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        self.title = "Main"
     }
     
-    @objc func showDetail(_ sender: Any) {
-        coordinator?.startDetail()
+    @objc func startFlowA(_ sender: Any) {
+        coordinator?.startFlowA()
     }
     
 }

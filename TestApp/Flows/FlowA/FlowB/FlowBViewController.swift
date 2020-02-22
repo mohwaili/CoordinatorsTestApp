@@ -10,24 +10,33 @@ import UIKit
 
 class FlowBViewController: UIViewController {
     
-    weak var coordinator: FlowBCoordinator?
+    var coordinator: FlowBCoordinator?
+    
+    var data: String? = nil {
+        didSet {
+            button.isEnabled = true
+            button.backgroundColor = .green
+        }
+    }
     
     private lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Close Me", for: .normal)
+        button.setTitle("Finish Flow", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        button.isEnabled = false
+        button.backgroundColor = .red
         view.addSubview(button)
         return button
     }()
     
-    private lazy var subFlowButton: UIButton = {
+    private lazy var goToB2Button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Open Sub Flow", for: .normal)
+        button.setTitle("Go To B2", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(startFlowC(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToB2(_:)), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -35,25 +44,27 @@ class FlowBViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "B1"
+        
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            subFlowButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subFlowButton.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10)
+            goToB2Button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            goToB2Button.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10)
         ])
         
-        view.backgroundColor = .white
+        view.backgroundColor = .cyan
     }
     
     @objc func buttonTapped(_ sender: Any) {
         coordinator?.finishFlow()
     }
     
-    @objc func startFlowC(_ sender: Any) {
-        coordinator?.startFlowC()
+    @objc func goToB2(_ sender: Any) {
+        coordinator?.goToB2()
     }
     
     deinit {

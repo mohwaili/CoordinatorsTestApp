@@ -9,8 +9,6 @@
 import Foundation
 
 class MainCoordinator: Coordinator {
-    var isCompleted: (() -> Void)?
-    
     
     let router: Router
     
@@ -24,7 +22,7 @@ class MainCoordinator: Coordinator {
         router.push(viewController: mainVC, animated: false, origin: self)
     }
     
-    func startDetail() {
+    func startFlowA() {
         let flowACoordinator = FlowACoordinator(router: router)
         prepare(child: flowACoordinator).start()
     }
