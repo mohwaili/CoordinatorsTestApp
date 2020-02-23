@@ -12,25 +12,6 @@ class FlowBViewController: UIViewController {
     
     var coordinator: FlowBCoordinator?
     
-    var data: String? = nil {
-        didSet {
-            button.isEnabled = true
-            button.backgroundColor = .green
-        }
-    }
-    
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Finish Flow", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        button.isEnabled = false
-        button.backgroundColor = .red
-        view.addSubview(button)
-        return button
-    }()
-    
     private lazy var goToB2Button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -47,20 +28,11 @@ class FlowBViewController: UIViewController {
         title = "B1"
         
         NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
             goToB2Button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            goToB2Button.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10)
+            goToB2Button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         view.backgroundColor = .cyan
-    }
-    
-    @objc func buttonTapped(_ sender: Any) {
-        coordinator?.finishFlow()
     }
     
     @objc func goToB2(_ sender: Any) {

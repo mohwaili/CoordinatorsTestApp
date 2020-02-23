@@ -56,6 +56,10 @@ class FlowA2ViewController: UIViewController {
             startFlowBButton.topAnchor.constraint(equalTo: goToA3Button.bottomAnchor, constant: 10)
         ])
         
+        coordinator?.receivedDataHandler = { [weak self] data in
+            self?.data = data
+        }
+        
         title = "A2"
     }
     

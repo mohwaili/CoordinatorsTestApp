@@ -13,12 +13,7 @@ class FlowACoordinator: Coordinator {
 
     let router: Router
     var rootViewController: FlowAViewController?
-    var flowA2ViewController: FlowA2ViewController?
-    var data: String? = nil {
-        didSet {
-            flowA2ViewController?.data = data
-        }
-    }
+    var receivedDataHandler: ((String) -> Void)?
     
     required init(router: Router) {
         self.router = router
@@ -31,9 +26,9 @@ class FlowACoordinator: Coordinator {
     }
     
     func goToA2() {
-        flowA2ViewController = FlowA2ViewController()
-        flowA2ViewController!.coordinator = self
-        router.push(viewController: flowA2ViewController!, animated: true, origin: nil)
+        let viewController = FlowA2ViewController()
+        viewController.coordinator = self
+        router.push(viewController: viewController, animated: true, origin: nil)
     }
     
     func goToA3() {
@@ -44,9 +39,7 @@ class FlowACoordinator: Coordinator {
     
     func startFlowB() {
         let coordinator = FlowBCoordinator(router: router)
-        coordinator.completion = { [weak self] data in
-            self?.data = data
-        }
+        coordinator.completion = receivedDataHandler
         prepare(child: coordinator).start()
     }
     

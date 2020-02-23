@@ -13,13 +13,8 @@ class FlowBCoordinator: Coordinator {
     let router: Router
     var rootViewController: UINavigationController!
     var completion: ((String) -> Void)?
-    var cData: String? = nil {
-        didSet {
-            if let bViewController = self.rootViewController.viewControllers.first as? FlowBViewController {
-                bViewController.data = cData
-            }
-        }
-    }
+    
+    var receivedDataHandler: ((String) -> Void)?
     
     required init(router: Router) {
         self.router = router
@@ -33,7 +28,7 @@ class FlowBCoordinator: Coordinator {
 }
     
     func finishFlow() {
-        completion?("B\(cData ?? "")")
+        completion?("B")
         router.dismiss(animated: true)
     }
     
@@ -45,9 +40,7 @@ class FlowBCoordinator: Coordinator {
     
     func startFlowC() {
         let coordinator = FlowCCoordinator(router: router)
-        coordinator.completion = { [weak self] data in
-            self?.cData = data
-        }
+        coordinator.completion = receivedDataHandler
         prepare(child: coordinator).start()
     }
     
