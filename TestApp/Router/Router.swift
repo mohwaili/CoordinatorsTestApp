@@ -109,35 +109,35 @@ extension RouterImp: UIAdaptivePresentationControllerDelegate {
     
 }
 
+fileprivate struct Keys {
+    static var childNavigationControllers: String = "childNavigationControllers"
+}
+
 extension UINavigationController {
     
-    private struct PropertiesContainer {
-        static var _childNavigationControllers = [String: [UINavigationController]]()
-    }
-    
-    private var childNavigationControllers: [UINavigationController] {
+    private var childNavigationControllers: [UINavigationController]? {
         get {
-            return PropertiesContainer._childNavigationControllers[self.description] ?? []
+            return objc_getAssociatedObject(self, &Keys.childNavigationControllers) as? [UINavigationController]
         }
         set {
-            PropertiesContainer._childNavigationControllers[self.description] = newValue
+            objc_setAssociatedObject(self, &Keys.childNavigationControllers, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
     
     /// Returns the last added navigation controller in the stack
     var activeNavigationController: UINavigationController {
-        return PropertiesContainer._childNavigationControllers[self.description]?.last ?? self
+        return childNavigationControllers?.last ?? self
     }
     
     func addChildNavigationController(_ navigationController: UINavigationController) {
-        if PropertiesContainer._childNavigationControllers[self.description] == nil  {
-            PropertiesContainer._childNavigationControllers[self.description] = []
+        if childNavigationControllers == nil {
+            childNavigationControllers = []
         }
         
-        childNavigationControllers.append(navigationController)
+        childNavigationControllers?.append(navigationController)
     }
     
     func removeChild(navigationController: UIViewController) {
-        PropertiesContainer._childNavigationControllers[self.description]?.removeAll(where: { $0 === navigationController })
+        childNavigationControllers?.removeAll(where: { $0 === navigationController })
     }
 }
