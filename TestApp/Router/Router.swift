@@ -27,7 +27,6 @@ protocol Router: class {
 class RouterImp: NSObject, Router {
     var navigationController: UINavigationController
     var onBackClosures: [String: FlowDestructionClosure] = [:]
-    private var childNavigationControllers: [UINavigationController] = []
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -36,26 +35,24 @@ class RouterImp: NSObject, Router {
     }
     
     func push(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
-        let navigationController = childNavigationControllers.last ?? self.navigationController
-        navigationController.pushViewController(viewController, animated: animated)
+        navigationController.activeNavigationController.pushViewController(viewController, animated: animated)
         guard let destructionClosure = origin?.isCompleted else { return }
         onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
     func pop(animated: Bool) {
-        let navigationController = childNavigationControllers.last ?? self.navigationController
-        navigationController.popViewController(animated: animated)
+        navigationController.activeNavigationController.popViewController(animated: animated)
     }
     
     func popToRoot(animated: Bool) {
-        navigationController.popToRootViewController(animated: animated)
+        navigationController.activeNavigationController.popToRootViewController(animated: animated)
     }
     
     func present(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         if viewController is UINavigationController {
             let childNavigationController = viewController as! UINavigationController
             childNavigationController.delegate = self
-            childNavigationControllers.append(childNavigationController)
+            navigationController.addChildNavigationController(childNavigationController)
         }
         
         navigationController.present(viewController, animated: animated)
@@ -73,7 +70,7 @@ class RouterImp: NSObject, Router {
     func executeClosure(viewController: UIViewController) {
         guard let onBackClosure = onBackClosures.removeValue(forKey: key(from: viewController)) else { return }
         if viewController is UINavigationController {
-            childNavigationControllers.removeAll(where: { $0 === viewController })
+            navigationController.removeChild(navigationController: viewController)
         }
         onBackClosure()
     }
@@ -87,7 +84,18 @@ class RouterImp: NSObject, Router {
 extension RouterImp: UINavigationControllerDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let previousViewController = navigationController.transitionCoordinator?.viewController(forKey: .from), !navigationController.viewControllers.contains(previousViewController) else { return }
+        
+        guard let previousViewController = navigationController.activeNavigationController.transitionCoordinator?.viewController(forKey: .from) else {
+            return
+        }
+        
+        if previousViewController is UINavigationController {
+            guard let rootViewController = (previousViewController as! UINavigationController).viewControllers.first,
+                !navigationController.viewControllers.contains(rootViewController) else { return }
+        } else {
+            guard !navigationController.activeNavigationController.viewControllers.contains(previousViewController) else { return }
+        }
+            
         executeClosure(viewController: previousViewController)
     }
     
@@ -99,5 +107,38 @@ extension RouterImp: UIAdaptivePresentationControllerDelegate {
         executeClosure(viewController: presentationController.presentedViewController)
     }
     
+}
+
+extension UINavigationController {
+    
+    private struct PropertiesContainer {
+        static var _childNavigationControllers = [String: [UINavigationController]]()
+    }
+    
+    private var childNavigationControllers: [UINavigationController] {
+        get {
+            return PropertiesContainer._childNavigationControllers[self.description] ?? []
+        }
+        set {
+            PropertiesContainer._childNavigationControllers[self.description] = newValue
+        }
+    }
+    
+    /// Returns the last added navigation controller in the stack
+    var activeNavigationController: UINavigationController {
+        return PropertiesContainer._childNavigationControllers[self.description]?.last ?? self
+    }
+    
+    func addChildNavigationController(_ navigationController: UINavigationController) {
+        if PropertiesContainer._childNavigationControllers[self.description] == nil  {
+            PropertiesContainer._childNavigationControllers[self.description] = []
+        }
+        
+        childNavigationControllers.append(navigationController)
+    }
+    
+    func removeChild(navigationController: UIViewController) {
+        PropertiesContainer._childNavigationControllers[self.description]?.removeAll(where: { $0 === navigationController })
+    }
 }
 

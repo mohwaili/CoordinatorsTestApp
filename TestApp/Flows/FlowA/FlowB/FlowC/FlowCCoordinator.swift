@@ -33,9 +33,7 @@ class FlowCCoordinator: Coordinator {
     
     func finishFlow() {
         completion?("C")
-        router.pop(animated: false)
-        router.pop(animated: false)
-        router.pop(animated: true)
+        router.popToRoot(animated: true)
     }
     
 }
