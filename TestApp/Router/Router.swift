@@ -24,7 +24,6 @@ protocol Router: class {
     func dismiss(animated: Bool)
 }
 
-
 class RouterImp: NSObject, Router {
     var navigationController: UINavigationController
     var destructionClosures: [String: FlowDestructionClosure] = [:]
