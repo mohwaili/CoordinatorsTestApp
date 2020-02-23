@@ -10,7 +10,7 @@ import UIKit
 
 class FlowA3ViewController: UIViewController {
     
-    weak var coordinator: FlowACoordinator?
+    var coordinator: FlowACoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()

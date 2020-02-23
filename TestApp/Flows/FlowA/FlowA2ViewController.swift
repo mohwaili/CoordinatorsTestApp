@@ -10,7 +10,7 @@ import UIKit
 
 class FlowA2ViewController: UIViewController {
     
-    weak var coordinator: FlowACoordinator?
+    var coordinator: FlowACoordinator?
     
     var data: String? = nil {
         didSet {

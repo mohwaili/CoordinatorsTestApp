@@ -10,7 +10,7 @@ import UIKit
 
 class FlowCViewController: UIViewController {
 
-    weak var coordinator: FlowCCoordinator?
+    var coordinator: FlowCCoordinator?
     
     private lazy var goToC2Button: UIButton = {
            let button = UIButton()
