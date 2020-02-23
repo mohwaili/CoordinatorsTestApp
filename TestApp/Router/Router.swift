@@ -14,7 +14,7 @@ typealias MemoryAddress = String
 
 protocol Router: class {
     var navigationController: UINavigationController { get set }
-    var onBackClosures: [MemoryAddress: FlowDestructionClosure] { get set }
+    var destructionClosures: [MemoryAddress: FlowDestructionClosure] { get set }
     
     func push(viewController: UIViewController, animated: Bool, origin: Coordinator?)
     func pop(animated: Bool)
@@ -26,7 +26,7 @@ protocol Router: class {
 
 class RouterImp: NSObject, Router {
     var navigationController: UINavigationController
-    var onBackClosures: [String: FlowDestructionClosure] = [:]
+    var destructionClosures: [String: FlowDestructionClosure] = [:]
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -36,8 +36,8 @@ class RouterImp: NSObject, Router {
     
     func push(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
         navigationController.activeNavigationController.pushViewController(viewController, animated: animated)
-        guard let destructionClosure = origin?.isCompleted else { return }
-        onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
+        guard let destructionClosure = origin?.destructionClosure else { return }
+        destructionClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
     func pop(animated: Bool) {
@@ -57,8 +57,8 @@ class RouterImp: NSObject, Router {
         
         navigationController.present(viewController, animated: animated)
         viewController.presentationController?.delegate = self
-        guard let destructionClosure = origin?.isCompleted else { return }
-        onBackClosures.updateValue(destructionClosure, forKey: key(from: viewController))
+        guard let destructionClosure = origin?.destructionClosure else { return }
+        destructionClosures.updateValue(destructionClosure, forKey: key(from: viewController))
     }
     
     func dismiss(animated: Bool) {
@@ -68,11 +68,11 @@ class RouterImp: NSObject, Router {
     }
     
     func executeClosure(viewController: UIViewController) {
-        guard let onBackClosure = onBackClosures.removeValue(forKey: key(from: viewController)) else { return }
+        guard let destructionClosure = destructionClosures.removeValue(forKey: key(from: viewController)) else { return }
         if viewController is UINavigationController {
             navigationController.removeChild(navigationController: viewController)
         }
-        onBackClosure()
+        destructionClosure()
     }
     
     private func key(from viewController: UIViewController) -> String {
@@ -141,4 +141,3 @@ extension UINavigationController {
         PropertiesContainer._childNavigationControllers[self.description]?.removeAll(where: { $0 === navigationController })
     }
 }
-

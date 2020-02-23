@@ -34,7 +34,7 @@ extension Coordinator {
         }
     }
     
-    var isCompleted: (() -> Void)? {
+    var destructionClosure: (() -> Void)? {
         get {
             return objc_getAssociatedObject(self, &Keys.isCompletedClosureId) as? (() -> Void)
         }
@@ -57,7 +57,7 @@ extension Coordinator {
     
     @discardableResult
     func prepare(child: Coordinator) -> Coordinator {
-        child.isCompleted = { [weak self, weak child] in
+        child.destructionClosure = { [weak self, weak child] in
             self?.release(child: child)
         }
         hold(child: child)
