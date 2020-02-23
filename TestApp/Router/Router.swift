@@ -17,6 +17,7 @@ protocol Router: class {
     var destructionClosures: [MemoryAddress: FlowDestructionClosure] { get set }
     
     func push(viewController: UIViewController, animated: Bool, origin: Coordinator?)
+    func push(viewController: UIViewController, animated: Bool)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
     func present(viewController: UIViewController, animated: Bool, origin: Coordinator?)
@@ -34,7 +35,11 @@ class RouterImp: NSObject, Router {
         self.navigationController.delegate = self
     }
     
-    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
+    func push(viewController: UIViewController, animated: Bool) {
+        push(viewController: viewController, animated: animated, origin: nil)
+    }
+    
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator? = nil) {
         navigationController.activeNavigationController.pushViewController(viewController, animated: animated)
         guard let destructionClosure = origin?.destructionClosure else { return }
         destructionClosures.updateValue(destructionClosure, forKey: key(from: viewController))

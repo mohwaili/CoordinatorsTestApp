@@ -28,7 +28,7 @@ class FlowCCoordinator: Coordinator {
     func goToC2() {
         let viewController = FlowC2ViewController()
         viewController.coordinator = self
-        router.push(viewController: viewController, animated: true, origin: nil)
+        router.push(viewController: viewController, animated: true)
     }
     
     func finishFlow() {
