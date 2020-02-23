@@ -40,7 +40,7 @@ class FlowBCoordinator: Coordinator {
     func goToB2() {
         let viewController = FlowB2ViewController()
         viewController.coordinator = self
-        router.push(viewController: viewController, animated: true, origin: self)
+        router.push(viewController: viewController, animated: true, origin: nil)
     }
     
     func startFlowC() {
