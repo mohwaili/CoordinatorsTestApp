@@ -11,7 +11,6 @@ import UIKit
 
 class FlowBCoordinator: Coordinator {
     let router: Router
-    var rootViewController: UINavigationController!
     var completion: ((String) -> Void)?
     
     var receivedDataHandler: ((String) -> Void)?
@@ -22,7 +21,7 @@ class FlowBCoordinator: Coordinator {
     
     func start() {
         let flowBViewController = FlowBViewController()
-        rootViewController = UINavigationController(rootViewController: flowBViewController)
+        let rootViewController = UINavigationController(rootViewController: flowBViewController)
         flowBViewController.coordinator = self
         router.present(viewController: rootViewController, animated: true, origin: self)
 }

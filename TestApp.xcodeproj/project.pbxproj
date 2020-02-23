@@ -188,9 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				BDB0179E240022B000D3E60A /* FlowC */,
-				BD252B7923FD3D7B0006A1CF /* FlowBCoordinator.swift */,
 				BDB017AF2401E97600D3E60A /* FlowBViewController.swift */,
 				BD252B7B23FD3DCB0006A1CF /* FlowB2ViewController.swift */,
+				BD252B7923FD3D7B0006A1CF /* FlowBCoordinator.swift */,
 			);
 			path = FlowB;
 			sourceTree = "<group>";

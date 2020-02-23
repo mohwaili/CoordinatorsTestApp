@@ -12,7 +12,6 @@ import UIKit
 class FlowACoordinator: Coordinator {
 
     let router: Router
-    var rootViewController: FlowAViewController?
     var receivedDataHandler: ((String) -> Void)?
     
     required init(router: Router) {
@@ -20,9 +19,9 @@ class FlowACoordinator: Coordinator {
     }
     
     func start() {
-        rootViewController = FlowAViewController()
-        rootViewController?.coordinator = self
-        router.push(viewController: rootViewController!, animated: true, origin: self)
+        let viewController = FlowAViewController()
+        viewController.coordinator = self
+        router.push(viewController: viewController, animated: true, origin: self)
     }
     
     func goToA2() {

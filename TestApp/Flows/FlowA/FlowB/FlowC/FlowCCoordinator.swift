@@ -12,7 +12,6 @@ import UIKit
 class FlowCCoordinator: Coordinator {
     
     let router: Router
-    var rootViewController: FlowCViewController!
     var completion: ((String) -> Void)?
     
     required init(router: Router) {
@@ -20,9 +19,9 @@ class FlowCCoordinator: Coordinator {
     }
     
     func start() {
-        rootViewController = FlowCViewController()
-        rootViewController.coordinator = self
-        router.push(viewController: rootViewController, animated: true, origin: self)
+        let viewController = FlowCViewController()
+        viewController.coordinator = self
+        router.push(viewController: viewController, animated: true, origin: self)
     }
     
     func goToC2() {
