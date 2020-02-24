@@ -31,4 +31,8 @@ class AppCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
+    deinit {
+        print("deallocating: \(Self.self)")
+    }
+    
 }

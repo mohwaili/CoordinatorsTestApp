@@ -46,4 +46,8 @@ class FlowACoordinator: Coordinator {
         router.pop(animated: true)
     }
     
+    deinit {
+        print("deallocating: \(Self.self)")
+    }
+    
 }

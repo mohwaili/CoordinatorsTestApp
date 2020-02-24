@@ -43,4 +43,8 @@ class FlowBCoordinator: Coordinator {
         prepare(child: coordinator).start()
     }
     
+    deinit {
+        print("deallocating: \(Self.self)")
+    }
+    
 }

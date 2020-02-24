@@ -27,4 +27,8 @@ class MainCoordinator: Coordinator {
         prepare(child: flowACoordinator).start()
     }
     
+    deinit {
+        print("deallocating: \(Self.self)")
+    }
+    
 }
