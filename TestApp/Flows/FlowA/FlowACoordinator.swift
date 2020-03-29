@@ -27,13 +27,13 @@ class FlowACoordinator: Coordinator {
     func goToA2() {
         let viewController = FlowA2ViewController()
         viewController.coordinator = self
-        router.push(viewController: viewController, animated: true)
+        router.push(viewController: viewController, animated: true, origin: self)
     }
     
     func goToA3() {
         let flowA3ViewController = FlowA3ViewController()
         flowA3ViewController.coordinator = self
-        router.push(viewController: flowA3ViewController, animated: true)
+        router.push(viewController: flowA3ViewController, animated: true, origin: self)
     }
     
     func startFlowB() {

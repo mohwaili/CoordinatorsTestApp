@@ -25,6 +25,10 @@ fileprivate struct Keys {
 
 extension Coordinator {
     
+    var memoryAddress: String {
+        return "\(Unmanaged.passUnretained(self).toOpaque())"
+    }
+    
     var childCoordinators: [Coordinator]? {
         get {
             return objc_getAssociatedObject(self, &Keys.childerCoordinatorsId) as? [Coordinator]

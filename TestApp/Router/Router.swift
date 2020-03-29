@@ -14,19 +14,18 @@ typealias MemoryAddress = String
 
 protocol Router: class {
     var navigationController: UINavigationController { get set }
-    var destructionClosures: [MemoryAddress: FlowDestructionClosure] { get set }
+    var destructionClosures: [MemoryAddress: (origin: MemoryAddress, closure: FlowDestructionClosure)] { get set }
     
-    func push(viewController: UIViewController, animated: Bool, origin: Coordinator?)
-    func push(viewController: UIViewController, animated: Bool)
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator)
     func pop(animated: Bool)
     func popToRoot(animated: Bool)
-    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?)
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator)
     func dismiss(animated: Bool)
 }
 
 class RouterImp: NSObject, Router {
     var navigationController: UINavigationController
-    var destructionClosures: [String: FlowDestructionClosure] = [:]
+    var destructionClosures: [MemoryAddress: (origin: MemoryAddress, closure: FlowDestructionClosure)] = [:]
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -34,14 +33,9 @@ class RouterImp: NSObject, Router {
         self.navigationController.delegate = self
     }
     
-    func push(viewController: UIViewController, animated: Bool) {
-        push(viewController: viewController, animated: animated, origin: nil)
-    }
-    
-    func push(viewController: UIViewController, animated: Bool, origin: Coordinator? = nil) {
+    func push(viewController: UIViewController, animated: Bool, origin: Coordinator) {
         navigationController.activeNavigationController.pushViewController(viewController, animated: animated)
-        guard let destructionClosure = origin?.destructionClosure else { return }
-        destructionClosures.updateValue(destructionClosure, forKey: key(from: viewController))
+        setDestructionClosure(for: origin, and: viewController)
     }
     
     func pop(animated: Bool) {
@@ -52,7 +46,7 @@ class RouterImp: NSObject, Router {
         navigationController.activeNavigationController.popToRootViewController(animated: animated)
     }
     
-    func present(viewController: UIViewController, animated: Bool, origin: Coordinator?) {
+    func present(viewController: UIViewController, animated: Bool, origin: Coordinator) {
         if viewController is UINavigationController {
             let childNavigationController = viewController as! UINavigationController
             childNavigationController.delegate = self
@@ -61,8 +55,16 @@ class RouterImp: NSObject, Router {
         
         navigationController.present(viewController, animated: animated)
         viewController.presentationController?.delegate = self
-        guard let destructionClosure = origin?.destructionClosure else { return }
-        destructionClosures.updateValue(destructionClosure, forKey: key(from: viewController))
+        setDestructionClosure(for: origin, and: viewController)
+    }
+    
+    private func setDestructionClosure(for origin: Coordinator, and viewController: UIViewController) {
+        guard
+            !destructionClosures.values.contains(where: { $0.0 == origin.memoryAddress }),
+            let destructionClosure = origin.destructionClosure else {
+            return
+        }
+        destructionClosures.updateValue((origin.memoryAddress, destructionClosure), forKey: key(from: viewController))
     }
     
     func dismiss(animated: Bool) {
@@ -72,11 +74,11 @@ class RouterImp: NSObject, Router {
     }
     
     func executeClosure(viewController: UIViewController) {
-        guard let destructionClosure = destructionClosures.removeValue(forKey: key(from: viewController)) else { return }
+        guard let destruction = destructionClosures.removeValue(forKey: key(from: viewController)) else { return }
         if viewController is UINavigationController {
             navigationController.removeChild(navigationController: viewController)
         }
-        destructionClosure()
+        destruction.closure()
     }
     
     private func key(from viewController: UIViewController) -> String {
